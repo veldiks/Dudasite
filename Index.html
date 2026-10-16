@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вась...</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .screen.active { display: flex; }
+  img {
+    max-width: 90%;
+    max-height: 55vh;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 40px rgba(79, 70, 229, 0.5);
+  }
+  h1 {
+    font-size: 44px;
+    margin-bottom: 10px;
+  }
+  p {
+    color: #aaa;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .hint {
+    margin-top: 25px;
+    color: #555;
+    font-size: 14px;
+  }
+  .pulse { animation: pulse 2s infinite; }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .shake { animation: shake 0.5s infinite; color: #4f46e5; }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 32px;
+    background: #4f46e5;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body onclick="nextScreen()">
+
+  <div class="screen active" id="screen1">
+    <img src="vasya.jpg" alt="Вась">
+    <h1 class="pulse">Вась...</h1>
+    <p>Ты это видишь?</p>
+    <div class="hint">(кликни в любом месте)</div>
+  </div>
+
+  <div class="screen" id="screen2">
+    <h1 class="shake">Не ну ты реально Вась</h1>
+    <p>Я так и знал.</p>
+    <div class="hint">(кликни ещё раз)</div>
+  </div>
+
+  <div class="screen" id="screen3">
+    <h1>Вась, ты лучший</h1>
+    <p>Этот сайт сделан специально для тебя.</p>
+    <p>Потому что ты — Вась. И это не обсуждается.</p>
+    <p>Обнимаю. Твой друг.</p>
+    <button class="btn" onclick="event.stopPropagation(); resetScreens();">Начать заново</button>
+  </div>
+
+<script>
+  let current = 1;
+  function nextScreen() {
+    if (current === 1) {
+      document.getElementById('screen1').classList.remove('active');
+      document.getElementById('screen2').classList.add('active');
+      current = 2;
+    } else if (current === 2) {
+      document.getElementById('screen2').classList.remove('active');
+      document.getElementById('screen3').classList.add('active');
+      current = 3;
+    }
+  }
+  function resetScreens() {
+    document.getElementById('screen3').classList.remove('active');
+    document.getElementById('screen1').classList.add('active');
+    current = 1;
+  }
+</script>
+
+</body>
+</html>
